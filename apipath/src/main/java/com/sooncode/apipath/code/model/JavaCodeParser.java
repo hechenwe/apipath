@@ -184,7 +184,7 @@ public class JavaCodeParser {
 
 	public static void main(String[] args) throws IOException {
 		JavaCodeParser parser = new JavaCodeParser();
-		String javaFile = "D:\\\\workspaces3\\\\zbank-account-front-v3.0.0\\\\zbank-account-web\\\\src\\\\main\\\\java\\\\com\\\\zbank\\\\account\\\\transfer\\\\biz\\\\impl\\\\TransferBizImpl.java";
+		String javaFile = "";
 		ClassModel classModel = parser.parseMethodDefs(javaFile);
 
 		System.out.println(classModel.getPackageString() + classModel.getClassName());

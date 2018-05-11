@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sun.source.tree.StatementTree;
+import com.sun.source.tree.Tree.Kind;
+import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
 import com.sun.tools.javac.tree.JCTree.JCIf;
+import com.sun.tools.javac.tree.JCTree.JCModifiers;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
+import com.sun.tools.javac.tree.JCTree.Tag;
 
 public class MethodParserCollect {
 
@@ -64,7 +68,11 @@ public class MethodParserCollect {
 			 
 			String type = jCVariableDecl.getType().toString();
 			
-			jCVariableDecl.getModifiers();
+			JCExpression  jcExpression = jCVariableDecl.getInitializer();
+			
+			Kind kind = jcExpression.getKind();
+			String str = jcExpression.toString(); 
+			
 			
 			 
 		}
