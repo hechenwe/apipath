@@ -4,14 +4,19 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.sun.source.tree.StatementTree;
-import com.sun.tools.javac.tree.JCTree;
+import com.sun.source.tree.Tree.Kind;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
 import com.sun.tools.javac.tree.JCTree.JCIf;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
 
 public class MethodParserCollect {
+
+	private static Log logger = LogFactory.getLog(MethodParserCollect.class);
 
 	static MethodParser EXPRESSION_STATEMENT = new MethodParser() {
 
@@ -21,13 +26,13 @@ public class MethodParserCollect {
 		}
 
 		@Override
-		public void getMethodModel(StatementTree statementTree,MethodModel methodModel) {
-			
+		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
+
 			JCExpressionStatement jCExpressionStatement = (JCExpressionStatement) statementTree;
 
 			JCExpression jcex = jCExpressionStatement.getExpression();
 			jcex.toString();
-			 
+
 		}
 	};
 
@@ -39,13 +44,13 @@ public class MethodParserCollect {
 		}
 
 		@Override
-		public void getMethodModel(StatementTree statementTree,MethodModel methodModel) {
+		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
 			JCIf jcif = (JCIf) statementTree;
 
 			JCExpression jcex = jcif.getCondition();
 
 			String expr = jcex.toString();
-			 
+
 		}
 	};
 
@@ -57,16 +62,20 @@ public class MethodParserCollect {
 		}
 
 		@Override
-		public void getMethodModel(StatementTree statementTree,MethodModel methodModel) {
-			
+		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
+
+			logger.info("[" + getTypeCode() + "]:" + statementTree.toString());
+
 			JCVariableDecl jCVariableDecl = (JCVariableDecl) statementTree;
 			String name = jCVariableDecl.getName().toString();
-			 
+
 			String type = jCVariableDecl.getType().toString();
-			
-			jCVariableDecl.getModifiers();
-			
-			 
+
+			JCExpression jcExpression = jCVariableDecl.getInitializer();
+
+			Kind kind = jcExpression.getKind(); // METHOD_INVOCATION ; NEW_CLASS
+			String str = jcExpression.toString();
+
 		}
 	};
 
@@ -78,19 +87,11 @@ public class MethodParserCollect {
 		}
 
 		@Override
-		public void getMethodModel(StatementTree statementTree,MethodModel methodModel) {
-			 
+		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
+
 		}
 	};
 
-	
-	
-	
-	
-	
-	
-	
-	
 	private static Map<String, MethodParser> map = new HashMap<>();
 
 	static {

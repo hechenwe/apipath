@@ -11,6 +11,9 @@ import java.util.List;
 
 import javax.lang.model.element.Name;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.sun.source.tree.AnnotationTree;
 import com.sun.source.tree.BlockTree;
 import com.sun.source.tree.ClassTree;
@@ -28,14 +31,15 @@ import com.sun.tools.javac.parser.Parser;
 import com.sun.tools.javac.parser.ParserFactory;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCCompilationUnit;
-import com.sun.tools.javac.tree.JCTree.JCExpression;
-import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
-import com.sun.tools.javac.tree.JCTree.JCIf;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
 import com.sun.tools.javac.util.Context;
 
 public class JavaCodeParser {
+	
+	
+	private static Log logger = LogFactory.getLog(JavaCodeParser.class);
 	private ParserFactory factory;
+	
 
 	public JavaCodeParser() {
 		factory = getParserFactory();
@@ -96,7 +100,8 @@ public class JavaCodeParser {
 
 			for (StatementTree st : list) {
 				Kind k = st.getKind();
-				System.out.println(k.name() + "  Class :"+ st.getClass());
+			 
+				logger.info(k.name() + "  Class :"+ st.getClass());
 				MethodParser methodParser =	MethodParserCollect.getMethodParser(k.name());
 			    methodParser.getMethodModel(st,mm);
 				 
@@ -186,12 +191,9 @@ public class JavaCodeParser {
 		JavaCodeParser parser = new JavaCodeParser();
 		String javaFile = "D:\\\\workspaces3\\\\zbank-account-front-v3.0.0\\\\zbank-account-web\\\\src\\\\main\\\\java\\\\com\\\\zbank\\\\account\\\\transfer\\\\biz\\\\impl\\\\TransferBizImpl.java";
 		ClassModel classModel = parser.parseMethodDefs(javaFile);
-
-		System.out.println(classModel.getPackageString() + classModel.getClassName());
-
+		logger.info(classModel.getPackageString() + classModel.getClassName());
 		for (FieldModel field : classModel.getFields()) {
-			System.out.println(field.getFieldName());
-
+			logger.info(field.getFieldName());
 		}
 
 	}
