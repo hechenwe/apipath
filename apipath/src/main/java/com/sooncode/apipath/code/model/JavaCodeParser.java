@@ -189,7 +189,10 @@ public class JavaCodeParser {
 
 	public static void main(String[] args) throws IOException {
 		JavaCodeParser parser = new JavaCodeParser();
+ 
 		String javaFile = "D:\\workspaces\\creative-build-api-doc-service\\creative-build-api-doc-service\\src\\main\\java\\com\\sooncode\\creative_build_api_doc_service\\controller\\InterfacController.java";
+ 
+	 
 		ClassModel classModel = parser.parseMethodDefs(javaFile);
 		logger.info(classModel.getPackageString() + classModel.getClassName());
 		for (FieldModel field : classModel.getFields()) {

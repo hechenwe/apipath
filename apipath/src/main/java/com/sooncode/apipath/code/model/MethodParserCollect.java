@@ -70,12 +70,16 @@ public class MethodParserCollect {
 			String name = jCVariableDecl.getName().toString();
 
 			String type = jCVariableDecl.getType().toString();
-
-			JCExpression jcExpression = jCVariableDecl.getInitializer();
-
-			Kind kind = jcExpression.getKind(); // METHOD_INVOCATION ; NEW_CLASS
-			String str = jcExpression.toString();
-
+ 
+			
+			JCExpression  jcExpression = jCVariableDecl.getInitializer();
+			
+			Kind kind = jcExpression.getKind();
+			String str = jcExpression.toString(); 
+			
+			
+			 
+ 
 		}
 	};
 
