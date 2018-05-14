@@ -91,6 +91,20 @@ public class MethodParserCollect {
 
 		}
 	};
+	
+	
+	static MethodParser ENHANCED_FOR_LOOP = new MethodParser() {
+		
+		@Override
+		public String getTypeCode() {
+			return "ENHANCED_FOR_LOOP";
+		}
+		
+		@Override
+		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
+			
+		}
+	};
 
 	private static Map<String, MethodParser> map = new HashMap<>();
 
