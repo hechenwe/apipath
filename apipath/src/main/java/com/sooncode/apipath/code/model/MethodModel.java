@@ -13,7 +13,7 @@ public class MethodModel {
 	private List<LocalValueModel> localValues ;
 	
 	
-	private Tree<MethodModel> invokeTree;
+	private Tree<TreeMethodModel> invokeTree;
 
 
 	public String getMethodName() {
@@ -36,12 +36,12 @@ public class MethodModel {
 	}
 
 
-	public Tree<MethodModel> getInvokeTree() {
+	public Tree<TreeMethodModel> getInvokeTree() {
 		return invokeTree;
 	}
 
 
-	public void setInvokeTree(Tree<MethodModel> invokeTree) {
+	public void setInvokeTree(Tree<TreeMethodModel> invokeTree) {
 		this.invokeTree = invokeTree;
 	}
 
