@@ -1,18 +1,27 @@
 package com.sooncode.apipath.code.model;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.sooncode.apipath.code.tree.Tree;
 import com.sun.source.tree.StatementTree;
 import com.sun.source.tree.Tree.Kind;
+import com.sun.tools.javac.code.Type;
+import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.tree.JCTree.JCExpression;
 import com.sun.tools.javac.tree.JCTree.JCExpressionStatement;
+import com.sun.tools.javac.tree.JCTree.JCFieldAccess;
+import com.sun.tools.javac.tree.JCTree.JCIdent;
 import com.sun.tools.javac.tree.JCTree.JCIf;
+import com.sun.tools.javac.tree.JCTree.JCMethodInvocation;
 import com.sun.tools.javac.tree.JCTree.JCVariableDecl;
+import com.sun.tools.javac.util.Name;
 
 public class MethodParserCollect {
 
@@ -63,6 +72,14 @@ public class MethodParserCollect {
 
 		@Override
 		public void getMethodModel(StatementTree statementTree, MethodModel methodModel) {
+			List<LocalValueModel> localValues = methodModel.getLocalValues();
+			if(localValues == null) {
+				localValues = new ArrayList<>();
+			}
+			
+			
+			
+			
 
 			logger.info("[" + getTypeCode() + "]:" + statementTree.toString());
 
@@ -75,8 +92,33 @@ public class MethodParserCollect {
 			JCExpression  jcExpression = jCVariableDecl.getInitializer();
 			
 			Kind kind = jcExpression.getKind();
-			String str = jcExpression.toString(); 
 			
+			if(kind.toString().equals("METHOD_INVOCATION")) {
+				
+			JCTree jcTree = jcExpression.getTree();
+			JCMethodInvocation jCMethodInvocation = (JCMethodInvocation) jcTree;
+			JCExpression jCExpression = jCMethodInvocation.getMethodSelect();
+		 
+			JCVariableDecl jcIdent = (JCVariableDecl) jCExpression.getTree();
+			
+			List<JCExpression> arguments =  jCMethodInvocation.getArguments();
+			 
+				Tree<TreeMethodModel>  tree = methodModel.getInvokeTree();
+				TreeMethodModel treeMethod = new TreeMethodModel();
+			//	treeMethod.setClassName(className);
+				if(tree == null) {
+					tree = new Tree<TreeMethodModel>(treeMethod);
+				}
+				
+				
+			}
+			
+			
+            LocalValueModel localValueModel = new LocalValueModel();
+            localValueModel.setValueName(name);
+			localValueModel.setType(type);
+			localValues.add(localValueModel);
+			methodModel.setLocalValues(localValues);
 			
 			 
  
