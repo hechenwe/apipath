@@ -2,7 +2,6 @@ package com.sooncode.apipath.code.tree;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Tree<E> {
 
 	private final int DEFAULT_TREE_SIZE = 100;

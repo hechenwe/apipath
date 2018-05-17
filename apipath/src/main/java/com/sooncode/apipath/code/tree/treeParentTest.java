@@ -22,6 +22,9 @@ public class treeParentTest {
         // 为根节点的第一个子节点新增一个子节点
         tp.addNode(nodes.get(0),"节点3");
         System.out.println("此树的深度：" + tp.deep());
+        
+        Tree<String> treeFirst = new Tree<String>("first");
+        
 
     }
 }

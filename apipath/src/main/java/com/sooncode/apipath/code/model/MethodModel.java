@@ -1,16 +1,16 @@
 package com.sooncode.apipath.code.model;
 
-import java.util.List;
+import java.util.Map;
 
-import com.sooncode.apipath.code.tree.Tree;
+import com.sooncode.apipath.code.newtree.Tree;
 
 public class MethodModel {
 
 	private String methodName ;
 	
-	private List<AnnotationModel> annotations ;
+	private Map<String,AnnotationModel> annotations ;
 	
-	private List<LocalValueModel> localValues ;
+	private Map<String,LocalValueModel> localValues ;
 	
 	
 	private Tree<TreeMethodModel> invokeTree;
@@ -26,14 +26,7 @@ public class MethodModel {
 	}
 
 
-	public List<LocalValueModel> getLocalValues() {
-		return localValues;
-	}
-
-
-	public void setLocalValues(List<LocalValueModel> localValues) {
-		this.localValues = localValues;
-	}
+ 
 
 
 	public Tree<TreeMethodModel> getInvokeTree() {
@@ -46,15 +39,27 @@ public class MethodModel {
 	}
 
 
-	public List<AnnotationModel> getAnnotations() {
+	public Map<String, AnnotationModel> getAnnotations() {
 		return annotations;
 	}
 
 
-	public void setAnnotations(List<AnnotationModel> annotations) {
+	public void setAnnotations(Map<String, AnnotationModel> annotations) {
 		this.annotations = annotations;
 	}
 
+
+	public Map<String, LocalValueModel> getLocalValues() {
+		return localValues;
+	}
+
+
+	public void setLocalValues(Map<String, LocalValueModel> localValues) {
+		this.localValues = localValues;
+	}
+
+
+ 
  
 	
 }
